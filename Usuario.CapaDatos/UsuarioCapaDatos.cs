@@ -9,9 +9,9 @@ namespace Usuario.CapaDatos
 {
     public class UsuarioCapaDatos : IUsuarioCapaDatos
     {
-        string[] usuarios={};
-
-
+        /// <summary>
+        /// Comprueba si ya existe en la tabla el usuario.
+        /// </summary>
         public bool Existe(string nombre)
         {
             bool existe=false;
@@ -22,7 +22,9 @@ namespace Usuario.CapaDatos
             return existe;
         }
 
-        
+        /// <summary>
+        /// Inserta un nuevo nombre de usuario en la tabla si no existe.
+        /// </summary>
         public void Crea(string nombre)
         {
             if (!Existe(nombre))
@@ -41,28 +43,9 @@ namespace Usuario.CapaDatos
                 }
             }
         }
-        public void CreaPrueba(string nombre)
-        {
-            if (!ExistePrueba(nombre))
-            {
-                Array.Resize(ref usuarios, usuarios.Length + 1);
-                usuarios[usuarios.Length - 1] = nombre;
-            }
-        }
-
-        public bool ExistePrueba(string nombre)
-        {
-            bool existe = false;
-            foreach (string usuario in usuarios)
-            {
-                if (usuario.Equals(nombre))
-                {
-                    existe = true;
-                    break;
-                }
-            }
-            return existe;
-        }
+        /// <summary>
+        /// Devuelve una cadena concatenada con todos los usuario almacenados en la tabla.
+        /// </summary>
         public override string ToString()
         {
 

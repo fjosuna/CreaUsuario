@@ -25,24 +25,25 @@ namespace Usuario.UnitTestProject
         }
 
         [TestMethod]
+        /// <summary>
+        /// Comprueba que se crea el usuario correctamente.
+        /// </summary>
         public void TestCreaUsuario()
         {
-
-            
             UsuarioCapaLogicaNegocio usuarioCapaLogicaNegocio = miContenedor.DameInstancia(typeof(IUsuarioCapaLogicaNegocio)) as UsuarioCapaLogicaNegocio;
             usuarioCapaLogicaNegocio.Init(miContenedor);
 
-            
             usuarioCapaLogicaNegocio.Crea("a");
-
+            
             UsuarioCapaDatos usuarioDatos = new UsuarioCapaDatos();
             Assert.IsTrue(usuarioDatos.Existe("a"));
 
         }
         [TestMethod]
-        ///<summary>
-        ///
-        ///</summary>
+        /// <summary>
+        /// Comprueba que la inserccion del usuario no es sensible a mayuscula/minusculas -> Debe de fallar porque no lo es
+        /// .
+        /// </summary>
         public void TestCreaUsuarioSensibleMinusculas()
         {
 
@@ -61,6 +62,11 @@ namespace Usuario.UnitTestProject
 
         [TestMethod]
         [ExpectedException(typeof(Usuario.MisExcepciones.UsuarioVacioException))]
+        /// <summary>
+        /// Comprueba que se devuelve una excepcion al intentar crear un usuario vacio
+        /// 
+        /// 
+        /// </summary>
         public void TestUsuarioVacio()
         {
             UsuarioCapaLogicaNegocio usuarioCapaLogicaNegocio = miContenedor.DameInstancia(typeof(IUsuarioCapaLogicaNegocio)) as UsuarioCapaLogicaNegocio;

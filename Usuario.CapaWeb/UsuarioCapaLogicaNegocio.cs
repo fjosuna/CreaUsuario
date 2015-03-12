@@ -16,12 +16,18 @@ namespace Usuario.CapaLogicaNegocio
     {
         private  IUsuarioCapaDatos usuarioCapaDatos;
 
+        /// <summary>
+        /// Obtenemos una instania del objeto de la capa de datos.
+        /// </summary>
         public void Init(IMiContenedorIoC miContenederIoC ){
 
             // Evitamos el constructor new para desacoplar al maximo la implementacion de la capa de datos
             usuarioCapaDatos = miContenederIoC.DameInstancia(typeof(IUsuarioCapaDatos)) as UsuarioCapaDatos;
         }
-        
+
+        /// <summary>
+        /// Usando la capa de datos creamos un nombre de usuario.
+        /// </summary>
         public void Crea(string nombre)
         {
             if (string.IsNullOrEmpty(nombre.Trim()))
@@ -31,6 +37,9 @@ namespace Usuario.CapaLogicaNegocio
             usuarioCapaDatos.Crea(nombre);
         }
 
+        /// <summary>
+        /// Obtiene una cadena con todos los usuarios. Metodo usado para comprobar la inserccion correcta de un usuario.
+        /// </summary>
         public string ToString()
         {
             return usuarioCapaDatos.ToString();

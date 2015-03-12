@@ -15,6 +15,10 @@ namespace UsuarioApp
 {
     public partial class WebForm : System.Web.UI.Page
     {
+        
+        /// <summary>
+        /// Almacenamos tanto el contenedor IoC como una instancia de la capa de negocio en la sesion.
+        /// </summary>
         private IUsuarioCapaLogicaNegocio _usuarioCapaLogicaNegocio;
         public IUsuarioCapaLogicaNegocio usuarioCapaLogicaNegocio
         {
@@ -42,22 +46,26 @@ namespace UsuarioApp
                 return this._usuarioCapaLogicaNegocio; 
             }
         }
-        
-        
+
+        /// <summary>
+        /// Metodo que respondel al evento del boton "Crear" y usando una instancia de la capa de negocio almacena el usuario en la base de datos.
+        /// </summary>
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
+
                 // Al pulsar el boton creamos el usuario en la capa de datos
                 usuarioCapaLogicaNegocio.Crea(txtUsuario.Text);
 
                 lblTodos.Text = usuarioCapaLogicaNegocio.ToString();
             }
-
+            // Excepcion controlada o tratada
             catch (UsuarioVacioException ex)
             {
                 lblError.Text = "No se permite un usuario vacío";
             }
+                // Excepcion no controlada
             catch (Exception ex)
             {
                 string msgExtendido = "";
@@ -68,10 +76,6 @@ namespace UsuarioApp
                 }
                 lblError.Text = "Se ha producido un error incontrolado: " + ex.Message + ". " + msgExtendido;
             }
-
         }
-
-        
-
     }
 }
